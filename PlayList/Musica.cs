@@ -1,8 +1,6 @@
-using System;
-
 namespace PlayList;
 
-class Musica
+internal class Musica
 {
   public string Nome { get; set; }
   public string Artista { get; set; }

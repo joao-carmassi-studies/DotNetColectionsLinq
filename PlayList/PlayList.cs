@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace PlayList;
 
-class Playlist : ICollection<Musica>
+internal class Playlist : ICollection<Musica>
 {
   public List<Musica> Musicas { get; private set; } = [];
 
