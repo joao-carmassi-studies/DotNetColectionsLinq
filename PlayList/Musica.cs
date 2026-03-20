@@ -1,6 +1,6 @@
 namespace PlayList;
 
-internal class Musica
+internal class Musica : IComparable<Musica>
 {
   public string Nome { get; set; }
   public string Artista { get; set; }
@@ -26,5 +26,22 @@ internal class Musica
   public bool Contains(string nome)
   {
     return Nome.Contains(nome);
+  }
+
+  public int CompareTo(Musica? obj)
+  {
+    return obj == null ? 1 : Duracao.CompareTo(obj.Duracao);
+  }
+
+  public override bool Equals(object? obj)
+  {
+    return obj is Musica m &&
+      Nome == m.Nome &&
+      Duracao == m.Duracao;
+  }
+
+  public override int GetHashCode()
+  {
+    return HashCode.Combine(Nome, Artista, Duracao);
   }
 }

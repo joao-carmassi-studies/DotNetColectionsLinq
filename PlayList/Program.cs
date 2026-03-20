@@ -27,4 +27,12 @@ Console.WriteLine("\nMusicas aleatorias: ");
 var listaAleatoria = Playlist.SequenciaAleatoria(metalCore);
 Playlist.ListaMusicas(listaAleatoria);
 
+Console.WriteLine("\nMusicas ordenadas por tempo: ");
+var listOrdenadaPorTempo = Playlist.OrdenaPorTempo(listaAleatoria);
+Playlist.ListaMusicas(listOrdenadaPorTempo);
+
+Console.WriteLine("\nTesta musicas repetidas: ");
+metalCore.Add(new Musica("1. Amen", "BMTH", 325));
+Playlist.ListaMusicas(metalCore);
+
 Console.ReadKey();

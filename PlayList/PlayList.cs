@@ -1,9 +1,11 @@
 using System.Collections;
+using System.Net.NetworkInformation;
 
 namespace PlayList;
 
 internal class Playlist : ICollection<Musica>
 {
+  public HashSet<Musica> SetMusicas { get; private set; } = [];
   public List<Musica> Musicas { get; private set; } = [];
 
   public int Count => Musicas.Count;
@@ -12,11 +14,15 @@ internal class Playlist : ICollection<Musica>
 
   public void Add(Musica item)
   {
-    Musicas.Add(item);
+    if (SetMusicas.Add(item))
+    {
+      Musicas.Add(item);
+    }
   }
 
   public void Clear()
   {
+    SetMusicas.Clear();
     Musicas.Clear();
   }
 
@@ -37,7 +43,11 @@ internal class Playlist : ICollection<Musica>
 
   public bool Remove(Musica item)
   {
-    return Musicas.Remove(item);
+    if (SetMusicas.Remove(item))
+    {
+      return Musicas.Remove(item);
+    }
+    return false;
   }
 
   IEnumerator IEnumerable.GetEnumerator()
@@ -74,5 +84,12 @@ internal class Playlist : ICollection<Musica>
   internal Musica? Find(Func<Musica, bool> value)
   {
     return Musicas.Find(m => value(m));
+  }
+
+  public static IEnumerable<Musica> OrdenaPorTempo(IEnumerable<Musica> playlist)
+  {
+    var lista = playlist.ToList();
+    lista.Sort();
+    return lista;
   }
 }
