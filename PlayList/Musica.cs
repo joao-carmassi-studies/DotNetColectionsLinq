@@ -37,6 +37,7 @@ internal class Musica : IComparable<Musica>
   {
     return obj is Musica m &&
       Nome == m.Nome &&
+      Artista == m.Artista &&
       Duracao == m.Duracao;
   }
 
