@@ -1,4 +1,5 @@
-﻿using PlayList;
+﻿using System.Text.Json;
+using PlayList;
 
 var metalCore = new Playlist
 {
@@ -34,5 +35,12 @@ Playlist.ListaMusicas(listOrdenadaPorTempo);
 Console.WriteLine("\nTesta musicas repetidas: ");
 metalCore.Add(new Musica("1. Amen", "BMTH", 325));
 Playlist.ListaMusicas(metalCore);
+
+var nomeDoArquivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "musicas.json");
+using (var arquivo = new FileStream(nomeDoArquivo, FileMode.Create, FileAccess.Write))
+{
+  JsonSerializer.Serialize(arquivo, metalCore.ToList());
+}
+Console.WriteLine("\nArquivo serializado com sucesso!!!");
 
 Console.ReadKey();
